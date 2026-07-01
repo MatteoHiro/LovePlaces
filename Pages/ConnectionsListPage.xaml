@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LovePlaceApp.ViewModels"
+             x:Class="LovePlaceApp.Pages.ConnectionsListPage"
+             Title="Le mie connessioni">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="16" RowSpacing="10">
+        <Button Text="Impostazioni"
+                Command="{Binding GoToSettingsCommand}"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
+
+        <HorizontalStackLayout Grid.Row="1" Spacing="8">
+            <Entry Placeholder="Codice invito"
+                   Text="{Binding InviteCodeToAccept}"
+                   HorizontalOptions="FillAndExpand"
+                   IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
+            <Button Text="Accetta" Command="{Binding AcceptInviteCommand}" />
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="2" Spacing="8">
+            <Button Text="Genera invito" Command="{Binding GenerateInviteCommand}" />
+            <Button Text="Aggiorna" Command="{Binding LoadCommand}" />
+        </HorizontalStackLayout>
+
+        <VerticalStackLayout Grid.Row="3" Spacing="8">
+            <Label Text="{Binding HelperMessage}" FontSize="12" TextColor="#666666" />
+            <Label Text="{Binding StatusMessage}" />
+
+            <HorizontalStackLayout Spacing="8" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" />
+                <Label Text="Aggiornamento in corso..." VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <VerticalStackLayout IsVisible="{Binding GeneratedInviteCode, Converter={StaticResource StringNotEmptyConverter}}" Spacing="2">
+                <Label Text="Ultimo invito generato" FontAttributes="Bold" />
+                <Label Text="{Binding GeneratedInviteCode, StringFormat='Codice: {0}'}" />
+                <Label Text="{Binding GeneratedInviteDeepLink, StringFormat='Deep link: {0}'}" FontSize="12" />
+            </VerticalStackLayout>
+
+            <CollectionView ItemsSource="{Binding Connections}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="#DDDDDD" Padding="12" Margin="0,4">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding PartnerName}" FontAttributes="Bold" FontSize="18" />
+                                <Label Text="{Binding PartnerUserId, StringFormat='ID partner: {0}'}" FontSize="12" />
+                                <Label Text="{Binding PlaceCount, StringFormat='Posti condivisi: {0}'}" FontSize="12" />
+                                <Button Text="Apri mondo"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ConnectionsListViewModel}}, Path=OpenConnectionCommand}"
+                                        CommandParameter="{Binding Id}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

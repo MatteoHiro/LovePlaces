@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LovePlaceApp.ViewModels"
+             x:Class="LovePlaceApp.Pages.PlaceListPage"
+             Title="Posti della connessione">
+
+    <Grid RowDefinitions="Auto,*" Padding="16" RowSpacing="10">
+        <HorizontalStackLayout Spacing="8">
+            <Button Text="Aggiungi posto" Command="{Binding AddPlaceCommand}" />
+            <Button Text="Aggiorna" Command="{Binding LoadCommand}" />
+        </HorizontalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="8">
+            <Label Text="{Binding StatusMessage}" />
+
+            <CollectionView ItemsSource="{Binding Places}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="#DDDDDD" Padding="12" Margin="0,4">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" />
+                                <Label Text="{Binding PlaceType}" FontSize="12" />
+                                <Label Text="{Binding DateVisited, StringFormat='Visitato: {0:dd/MM/yyyy}'}" FontSize="12" />
+                                <Button Text="Dettaglio" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlaceListViewModel}}, Path=OpenPlaceCommand}" CommandParameter="{Binding Id}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

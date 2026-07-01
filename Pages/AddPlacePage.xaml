@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LovePlaceApp.ViewModels"
+             x:Class="LovePlaceApp.Pages.AddPlacePage"
+             Title="Aggiungi posto">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="10">
+            <Label Text="{Binding StatusMessage}" />
+
+            <Button Text="Rileva posizione GPS" Command="{Binding DetectLocationCommand}" />
+
+            <Entry Placeholder="Nome" Text="{Binding Name}" />
+            <Entry Placeholder="Indirizzo" Text="{Binding Address}" />
+            <Editor Placeholder="Descrizione" AutoSize="TextChanges" Text="{Binding Description}" />
+
+            <Label Text="Categoria luogo" FontAttributes="Bold" />
+            <Picker Title="Seleziona categoria" ItemsSource="{Binding PlaceTypeOptions}" SelectedItem="{Binding PlaceType}" />
+
+            <Label Text="Vibe musicale" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding MusicVibeOptions}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding IsSelected}" />
+                            <Label Text="{Binding Value}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Atmosfera" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding AtmosphereTagOptions}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding IsSelected}" />
+                            <Label Text="{Binding Value}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <VerticalStackLayout IsVisible="{Binding IsFoodPlace}">
+                <Label Text="Cucina" FontAttributes="Bold" />
+                <CollectionView ItemsSource="{Binding CuisineTagOptions}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <HorizontalStackLayout>
+                                <CheckBox IsChecked="{Binding IsSelected}" />
+                                <Label Text="{Binding Value}" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <Label Text="Atmosfera (1-5)" />
+            <Slider Minimum="1" Maximum="5" Value="{Binding Atmosphere}" />
+            <Label Text="Value for money (1-5)" />
+            <Slider Minimum="1" Maximum="5" Value="{Binding ValueForMoney}" />
+
+            <Button Text="Salva" Command="{Binding SaveCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

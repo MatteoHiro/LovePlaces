@@ -1,0 +1,48 @@
+{
+	"servers": {
+		"github": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@artificable/github-mcp-server",
+				"stdio"
+			],
+			"env": {
+				"GITHUB_PERSONAL_ACCESS_TOKEN": "${input:githubToken}"
+			}
+		},
+		"sonarqube": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"sonarqube-api-mcp"
+			],
+			"env": {
+				"SONAR_HOST_URL": "${input:sonarUrl}",
+				"SONAR_TOKEN": "${input:sonarToken}"
+			}
+		}
+	},
+	"inputs": [
+		{
+			"id": "githubToken",
+			"type": "promptString",
+			"description": "GitHub Personal Access Token (scopes: repo, read:org)",
+			"password": true
+		},
+		{
+			"id": "sonarUrl",
+			"type": "promptString",
+			"description": "SonarQube URL (es: https://sonarqube.company.local)",
+			"password": false
+		},
+		{
+			"id": "sonarToken",
+			"type": "promptString",
+			"description": "SonarQube user token",
+			"password": true
+		}
+	]
+}

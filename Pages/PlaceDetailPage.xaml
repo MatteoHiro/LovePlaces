@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LovePlaceApp.ViewModels"
+             x:Class="LovePlaceApp.Pages.PlaceDetailPage"
+             Title="Dettaglio posto">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="10">
+            <Label Text="{Binding StatusMessage}" />
+
+            <Frame BorderColor="#DDDDDD" Padding="12">
+                <VerticalStackLayout>
+                    <Label Text="{Binding Place.Name}" FontSize="22" FontAttributes="Bold" />
+                    <Label Text="{Binding Place.Address}" />
+                    <Label Text="{Binding Place.PlaceType}" FontSize="12" />
+                    <Label Text="{Binding Place.Description}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Label Text="Note" FontAttributes="Bold" FontSize="18" />
+            <Editor Placeholder="Scrivi una nota" AutoSize="TextChanges" Text="{Binding NewNoteText}" />
+            <HorizontalStackLayout>
+                <CheckBox IsChecked="{Binding IsSharedNote}" />
+                <Label Text="Nota condivisa" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <Button Text="Aggiungi nota" Command="{Binding AddNoteCommand}" />
+
+            <CollectionView ItemsSource="{Binding Notes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="#EEEEEE" Padding="10" Margin="0,4">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Text}" />
+                                <Label Text="{Binding AuthorName, StringFormat='Autore: {0}'}" FontSize="12" />
+                                <Button Text="Elimina" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlaceDetailViewModel}}, Path=DeleteNoteCommand}" CommandParameter="{Binding Id}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Foto" FontAttributes="Bold" FontSize="18" />
+            <Entry Placeholder="Caption (opzionale)" Text="{Binding NewPhotoCaption}" />
+            <Button Text="Aggiungi foto" Command="{Binding AddPhotoCommand}" />
+
+            <CollectionView ItemsSource="{Binding Photos}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="#EEEEEE" Padding="10" Margin="0,4">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding FilePath}" FontSize="12" />
+                                <Label Text="{Binding Caption}" />
+                                <Button Text="Elimina" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlaceDetailViewModel}}, Path=DeletePhotoCommand}" CommandParameter="{Binding Id}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

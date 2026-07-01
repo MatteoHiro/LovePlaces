@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:LovePlaceApp.ViewModels"
+             x:Class="LovePlaceApp.Pages.RegisterPage"
+             x:DataType="vm:RegisterViewModel"
+             Title="Registrazione">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="12">
+            <Label Text="Crea il tuo account" FontSize="24" FontAttributes="Bold" />
+
+            <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
+            <Entry Placeholder="Username" Text="{Binding Username}" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
+            <Entry Placeholder="Display name (opzionale)" Text="{Binding DisplayName}" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
+            <Entry Placeholder="Conferma password" Text="{Binding ConfirmPassword}" IsPassword="True" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
+            <Entry Placeholder="Eta (opzionale)" Text="{Binding Age}" Keyboard="Numeric" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
+            <Entry Placeholder="Genere (opzionale)" Text="{Binding Gender}" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
+
+            <Label Text="{Binding HelperMessage}" FontSize="12" TextColor="#666666" />
+
+            <Label Text="{Binding ErrorMessage}" TextColor="Red" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyConverter}}" />
+
+            <HorizontalStackLayout Spacing="8" IsVisible="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" />
+                <Label Text="Registrazione in corso..." VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Button Text="Crea account" Command="{Binding RegisterCommand}" />
+            <Button Text="Indietro" Command="{Binding GoBackCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

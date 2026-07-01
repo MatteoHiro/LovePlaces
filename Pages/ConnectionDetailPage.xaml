@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:vm="clr-namespace:LovePlaceApp.ViewModels"
+             x:Class="LovePlaceApp.Pages.ConnectionDetailPage"
+             x:DataType="vm:ConnectionDetailViewModel"
+             Title="{Binding Title}">
+
+    <Grid Padding="12" RowDefinitions="Auto,*,Auto" RowSpacing="10">
+        <Label Text="{Binding StatusMessage}" />
+
+        <Grid Grid.Row="1">
+            <maps:Map x:Name="ConnectionMap" />
+        </Grid>
+
+        <HorizontalStackLayout Grid.Row="2" Spacing="10">
+            <Button Text="Lista posti" Command="{Binding OpenPlacesCommand}" />
+            <Button Text="Aggiungi posto" Command="{Binding AddPlaceCommand}" />
+            <Button Text="Aggiorna" Command="{Binding LoadCommand}" />
+        </HorizontalStackLayout>
+    </Grid>
+
+</ContentPage>
