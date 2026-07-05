@@ -1,6 +1,9 @@
-﻿# LovePlaceApp (MAUI Client)
+﻿# LovePlaceApp (MAUI Client + API)
 
-Client .NET MAUI per Love Places.
+Repository con:
+
+- client .NET MAUI (`LovePlaceApp.csproj`)
+- backend ASP.NET Core Web API (`LovePlaces.Api/LovePlaces.Api.csproj`)
 
 ## Configurazione ambienti
 
@@ -25,15 +28,18 @@ dotnet run --project LovePlaceApp.csproj -f net10.0-windows10.0.19041.0 -c Debug
 
 ## Nota su database ("ribaltare il DB")
 
-Questo repository contiene solo il client MAUI, quindi **non** include DbContext/migrations SQL Server.
-Il ribaltamento del DB va eseguito nel repository API/backend.
+Il backend API include EF Core SQL Server con migration iniziale (`InitialCreate`).
 
-Comandi tipici (nel repo backend):
+Comandi tipici (dalla root del repository):
 
 ```powershell
 dotnet ef migrations add <NomeMigration> --project LovePlaces.Api --startup-project LovePlaces.Api
 dotnet ef database update --project LovePlaces.Api --startup-project LovePlaces.Api
 ```
+
+Connection string di default in `LovePlaces.Api/appsettings.json`:
+
+- `Server=(localdb)\\MSSQLLocalDB;Database=LovePlacesDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True`
 
 Se vuoi, nel prossimo step posso collegare il client al backend effettivo (URL dev/stage/prod) e rimuovere il fallback locale usato in debug.
 
