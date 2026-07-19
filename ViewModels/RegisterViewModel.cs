@@ -116,7 +116,7 @@ public partial class RegisterViewModel(IApiService apiService, IAuthStateService
         return Shell.Current.GoToAsync("..");
     }
 
-    private bool CanRegister()
+    private bool CanRegister() // NOSONAR: accesses observable instance properties IsBusy, Email, Username, Password, ConfirmPassword
     {
         return !IsBusy
             && !string.IsNullOrWhiteSpace(Email)
@@ -125,7 +125,7 @@ public partial class RegisterViewModel(IApiService apiService, IAuthStateService
             && !string.IsNullOrWhiteSpace(ConfirmPassword);
     }
 
-    private bool ValidateInputs()
+    private bool ValidateInputs() // NOSONAR: accesses and sets observable instance properties
     {
         if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
         {

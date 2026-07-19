@@ -49,9 +49,9 @@ public partial class AddPlaceViewModel(IApiService apiService, IGeoLocationServi
     public ObservableCollection<SelectableTag> AtmosphereTagOptions { get; } = [];
     public ObservableCollection<SelectableTag> CuisineTagOptions { get; } = [];
 
-    public bool IsFoodPlace => PlaceTagOptions.FoodPlaceTypes.Contains(PlaceType);
+    public bool IsFoodPlace => PlaceTagOptions.FoodPlaceTypes.Contains(PlaceType); // NOSONAR: accesses observable instance property PlaceType
 
-    public void SetConnection(int id)
+    public void SetConnection(int id) // NOSONAR: sets observable instance property ConnectionId
     {
         ConnectionId = id;
     }

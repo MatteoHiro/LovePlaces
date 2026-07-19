@@ -37,7 +37,7 @@ public partial class PlaceDetailViewModel(IApiService apiService) : ObservableOb
     [ObservableProperty]
     private string? newPhotoCaption;
 
-    public void SetRoute(int connection, int place)
+    public void SetRoute(int connection, int place) // NOSONAR: sets observable instance properties ConnectionId and PlaceId
     {
         ConnectionId = connection;
         PlaceId = place;

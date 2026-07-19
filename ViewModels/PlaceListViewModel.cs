@@ -19,7 +19,7 @@ public partial class PlaceListViewModel(IApiService apiService) : ObservableObje
     [ObservableProperty]
     private string? statusMessage;
 
-    public void SetConnection(int id)
+    public void SetConnection(int id) // NOSONAR: sets observable instance property ConnectionId
     {
         ConnectionId = id;
     }
@@ -44,7 +44,7 @@ public partial class PlaceListViewModel(IApiService apiService) : ObservableObje
                 Places.Add(place);
             }
 
-            if (Places.Count == 0)
+            if (places.Count == 0)
             {
                 StatusMessage = "Nessun posto in questa connessione.";
             }

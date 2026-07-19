@@ -92,14 +92,14 @@ public partial class LoginViewModel(IApiService apiService, IAuthStateService au
         return Shell.Current.GoToAsync("register");
     }
 
-    private bool CanLogin()
+    private bool CanLogin() // NOSONAR: accesses observable instance properties IsBusy, Email, Password
     {
         return !IsBusy
             && !string.IsNullOrWhiteSpace(Email)
             && !string.IsNullOrWhiteSpace(Password);
     }
 
-    private bool ValidateInputs()
+    private bool ValidateInputs() // NOSONAR: accesses and sets observable instance properties
     {
         if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
         {

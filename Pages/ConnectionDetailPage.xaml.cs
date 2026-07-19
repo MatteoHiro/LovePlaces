@@ -42,7 +42,7 @@ public partial class ConnectionDetailPage : ContentPage
         ConnectionMap.Pins.Clear();
     }
 
-    private void OnPinsChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private void OnPinsChanged(object? sender, NotifyCollectionChangedEventArgs e) // NOSONAR: accesses instance method RefreshMapPins
     {
         MainThread.BeginInvokeOnMainThread(RefreshMapPins);
     }

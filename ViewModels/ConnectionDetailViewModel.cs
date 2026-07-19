@@ -22,7 +22,7 @@ public partial class ConnectionDetailViewModel(IApiService apiService) : Observa
     [ObservableProperty]
     private string? statusMessage;
 
-    public void SetConnection(int id)
+    public void SetConnection(int id) // NOSONAR: sets observable instance properties ConnectionId and Title
     {
         ConnectionId = id;
         Title = $"Connessione #{id}";

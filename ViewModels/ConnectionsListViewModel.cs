@@ -175,12 +175,12 @@ public partial class ConnectionsListViewModel(IApiService apiService) : Observab
         return Shell.Current.GoToAsync($"connection-detail?connectionId={connectionId}");
     }
 
-    private bool CanExecuteBusyActions()
+    private bool CanExecuteBusyActions() // NOSONAR: accesses observable instance property IsBusy
     {
         return !IsBusy;
     }
 
-    private bool CanAcceptInvite()
+    private bool CanAcceptInvite() // NOSONAR: accesses observable instance properties IsBusy and InviteCodeToAccept
     {
         return !IsBusy && !string.IsNullOrWhiteSpace(InviteCodeToAccept);
     }
