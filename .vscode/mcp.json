@@ -20,7 +20,7 @@
 				"sonarqube-api-mcp"
 			],
 			"env": {
-				"SONAR_HOST_URL": "https://sonarcloud.io",
+				"SONAR_HOST_URL": "${env:SONAR_HOST_URL}",
 				"SONAR_TOKEN": "${env:SONAR_TOKEN}"
 			}
 		}
