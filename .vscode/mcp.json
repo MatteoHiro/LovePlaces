@@ -20,8 +20,8 @@
 				"sonarqube-api-mcp"
 			],
 			"env": {
-				"SONAR_HOST_URL": "${input:sonarUrl}",
-				"SONAR_TOKEN": "${input:sonarToken}"
+				"SONAR_HOST_URL": "https://sonarcloud.io",
+				"SONAR_TOKEN": "${env:SONAR_TOKEN}"
 			}
 		}
 	},
@@ -35,11 +35,11 @@
 		{
 			"id": "sonarUrl",
 			"type": "promptString",
-			"description": "SonarQube URL (es: https://sonarqube.company.local)",
+			"description": "SonarQube URL (e.g., https://sonarqube.company.local)",
 			"password": false
 		},
 		{
-			"id": "sonarToken",
+			"id": "sonarTokenV4",
 			"type": "promptString",
 			"description": "SonarQube user token",
 			"password": true

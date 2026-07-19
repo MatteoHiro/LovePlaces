@@ -10,27 +10,24 @@ public partial class PlaceDetailPage : ContentPage
     private int _connectionId;
     private int _placeId;
 
-    public string ConnectionId
+    public string? ConnectionId { get; set; }
+    public string? PlaceId { get; set; }
+
+    private void OnConnectionIdChanged()
     {
-        set
+        if (int.TryParse(ConnectionId, out var id))
         {
-            if (int.TryParse(value, out var id))
-            {
-                _connectionId = id;
-                _viewModel.SetRoute(_connectionId, _placeId);
-            }
+            _connectionId = id;
+            _viewModel.SetRoute(_connectionId, _placeId);
         }
     }
 
-    public string PlaceId
+    private void OnPlaceIdChanged()
     {
-        set
+        if (int.TryParse(PlaceId, out var id))
         {
-            if (int.TryParse(value, out var id))
-            {
-                _placeId = id;
-                _viewModel.SetRoute(_connectionId, _placeId);
-            }
+            _placeId = id;
+            _viewModel.SetRoute(_connectionId, _placeId);
         }
     }
 

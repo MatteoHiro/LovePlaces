@@ -7,14 +7,13 @@ public partial class AddPlacePage : ContentPage
 {
     private readonly AddPlaceViewModel _viewModel;
 
-    public string ConnectionId
+    public string? ConnectionId { get; set; }
+
+    private void OnConnectionIdChanged()
     {
-        set
+        if (int.TryParse(ConnectionId, out var id))
         {
-            if (int.TryParse(value, out var id))
-            {
-                _viewModel.SetConnection(id);
-            }
+            _viewModel.SetConnection(id);
         }
     }
 

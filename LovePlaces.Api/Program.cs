@@ -21,4 +21,4 @@ app.UseHttpsRedirection();
 
 app.MapGet("/health", () => Results.Ok(new { Status = "ok" }));
 
-app.Run();
+await app.RunAsync();

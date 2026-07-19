@@ -66,14 +66,14 @@ public partial class AddPlaceViewModel(IApiService apiService, IGeoLocationServi
         var tags = await apiService.GetTagOptionsAsync();
         var placeTypes = tags?.PlaceTypes?.Count > 0 ? tags.PlaceTypes : [.. PlaceTagOptions.PlaceTypes];
         var music = tags?.MusicVibes?.Count > 0 ? tags.MusicVibes : [.. PlaceTagOptions.MusicVibes];
-        var atmosphere = tags?.AtmosphereTags?.Count > 0 ? tags.AtmosphereTags : [.. PlaceTagOptions.AtmosphereTags];
+        var atmosphereTags = tags?.AtmosphereTags?.Count > 0 ? tags.AtmosphereTags : [.. PlaceTagOptions.AtmosphereTags];
         var cuisine = tags?.CuisineTags?.Count > 0 ? tags.CuisineTags : [.. PlaceTagOptions.CuisineTags];
 
         PlaceTypeOptions = placeTypes;
         PlaceType = PlaceTypeOptions.FirstOrDefault() ?? "Altro";
 
         PopulateSelectable(MusicVibeOptions, music);
-        PopulateSelectable(AtmosphereTagOptions, atmosphere);
+        PopulateSelectable(AtmosphereTagOptions, atmosphereTags);
         PopulateSelectable(CuisineTagOptions, cuisine);
     }
 
